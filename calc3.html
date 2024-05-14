@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовая грамотность</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+             align-items: center; /* Центрирование по вертикали */
+             justify-content: center; /* Центрирование по горизонтали */
+        }
+        .calculator {
+            width: 300px;
+            margin-right: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"], input[type="text"] {
+            width: calc(100% - 22px); /* Adjusted for padding and border */
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ccc; /* Серый цвет */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #aaa; /* Цвет при наведении */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Финансовая грамотность</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li>
+                    <a href="#">Статьи</a>
+                    <ul class="submenu">
+                        <li><a href="txt3.html">Страхование</a></li>
+                        <li><a href="txt2.html">Инвестиции</a></li>
+                        <li><a href="txt1.html">Кредиты</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Калькуляторы</a>
+                    <ul class="submenu">
+                        <li><a href="calc2.html">Инфляции</a></li>
+                        <li><a href="calc3.html">Депозитный</a></li>
+                        <li><a href="calc.html">Кредитный</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+    <div class="calculator">
+        <h2>Депозитный калькулятор</h2>
+        <label for="principal">Изначальная сумма:</label>
+        <input type="number" id="principal" placeholder="Сумма" required><br>
+        <label for="interest">Процентная ставка (%):</label>
+        <input type="number" id="interest" placeholder="Процент" required><br>
+        <label for="years">Срок (в годах):</label>
+        <input type="number" id="years" placeholder="Срок" required><br>
+        <button onclick="calculate()">Рассчитать</button>
+        <p id="result"></p>
+    </div>
+
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    function calculate() {
+    var principal = parseFloat(document.getElementById('principal').value);
+    var interest = parseFloat(document.getElementById('interest').value);
+    var years = parseFloat(document.getElementById('years').value);
+
+    var totalAmount = principal * (1 + (interest / 100) * years);
+    var interestEarned = totalAmount - principal;
+
+    var formattedTotalAmount = totalAmount.toLocaleString('ru-RU') + " руб."; // Форматирование с разделителями тысяч и добавление "руб."
+    var formattedInterestEarned = interestEarned.toLocaleString('ru-RU') + " руб."; // Форматирование с разделителями тысяч и добавление "руб."
+
+    document.getElementById('result').innerHTML = "Итоговая сумма: " + formattedTotalAmount + "<br>Прибыль: " + formattedInterestEarned;
+
+    // Удаление существующей диаграммы, если она существует
+    var existingChart = Chart.getChart('myChart');
+    if (existingChart) {
+        existingChart.destroy();
+    }
+
+    // Создание новой диаграммы
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Изначальная сумма', 'Прибыль'],
+            datasets: [{
+                label: 'Депозит',
+                data: [principal, interestEarned],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Депозит и прибыль'
+                }
+            }
+        }
+    });
+}
+
+
+</script>
+    </main>
+</body>
+</html>

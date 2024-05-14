@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовая грамотность</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+.center {
+
+   font-size: 23px; /* Увеличение размера шрифта */
+    margin-left: 250px; /* Ограничение поля слева */
+    margin-right:250px; /* Ограничение поля справа */
+   
+}
+.center2 {
+
+    margin-left: 550px; /* Ограничение поля слева */
+    margin-right:250px; /* Ограничение поля справа */
+}
+   </style>
+   <style>
+.sliding-button {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  position: relative;
+  padding: 15px 30px;
+  border: 1px solid;
+  border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+  border-image-slice: 1;
+  margin: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: 2px;
+  transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+.sliding-button:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 0;
+  width: 100%;
+  z-index: -1;
+  color: white;
+  background: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+  transition: .8s cubic-bezier(.165, .84, .44, 1);
+}
+.sliding-button:hover {
+  background: rgba(255, 255, 255, 0);
+}
+.sliding-button:hover:before {
+  bottom: 0%;
+  top: auto;
+  height: 100%;
+}
+
+</style>
+</head>
+<body>
+        <header>
+        <h1>Финансовая грамотность</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li>
+                    <a href="#">Статьи</a>
+                    <ul class="submenu">
+                        <li><a href="txt3.html">Страхование</a></li>
+                        <li><a href="txt2.html">Инвестиции</a></li>
+                        <li><a href="txt1.html">Кредиты</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Калькуляторы</a>
+                    <ul class="submenu">
+                        <li><a href="calc2.html">Инфляции</a></li>
+                        <li><a href="calc3.html">Депозитный</a></li>
+                        <li><a href="calc.html">Кредитный</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Добро пожаловать на сайт о финасовой грмотности – ваш навигатор в мире финансов!</h1>
+        <div class="center"> 
+        <p>Мы предлагаем для вас инструменты и знания, чтобы вы могли управлять своими финансами умно и эффективно. Используйте наши интерактивные калькуляторы для планирования бюджета, расчета кредитов и депозитов, и читайте наши статьи, чтобы быть в потоке финансового мира.</p>
+        </div>
+        <div class="center2">
+        <h1>Калькуляторы для Вас:</h1>
+        <a href="calc2.html" class="sliding-button">Инфляции</a>
+        <a href="calc3.html" class="sliding-button">Депозитный</a>
+        <a href="calc.html" class="sliding-button">Кредитный</a>
+        </div>
+    </main>
+</body>
+</html>

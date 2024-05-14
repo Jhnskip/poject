@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Финансовая грамотность</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>.calculator {
+    width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #aaa;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Финансовая грамотность</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li>
+                    <a href="#">Статьи</a>
+                    <ul class="submenu">
+                        <li><a href="txt3.html">Страхование</a></li>
+                        <li><a href="txt2.html">Инвестиции</a></li>
+                        <li><a href="txt1.html">Кредиты</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Калькуляторы</a>
+                    <ul class="submenu">
+                        <li><a href="calc2.html">Инфляции</a></li>
+                        <li><a href="calc3.html">Депозитный</a></li>
+                        <li><a href="calc.html">Кредитный</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+          <div class="calculator">
+        <h2>Калькулятор инфляции</h2>
+        <div class="input-group">
+            <label for="initial-value">Начальная сумма:</label>
+            <input type="number" id="initial-value" min="0">
+        </div>
+        <div class="input-group">
+            <label for="start-year">Начальный год:</label>
+            <select id="start-year"></select>
+        </div>
+        <div class="input-group">
+            <label for="end-year">Конечный год:</label>
+            <select id="end-year"></select>
+        </div>
+        <button onclick="calculate()">Рассчитать</button>
+        <div id="result"></div>
+    </div>
+    <script> // Заполнение опций выбора года
+const startYearSelect = document.getElementById("start-year");
+const endYearSelect = document.getElementById("end-year");
+
+for (let year = 1991; year <= 2024; year++) {
+    const option = document.createElement("option");
+    option.text = year;
+    option.value = year;
+    startYearSelect.add(option);
+    endYearSelect.add(option.cloneNode(true)); // Клонирование опций для выбора конечного года
+}
+
+// Объект, содержащий ставки инфляции для каждого года
+const inflationRates = {
+    1991: 160.4,
+    1992: 2508.8,
+    1993: 840.0,
+    1994: 214.8,
+    1995: 131.6,
+    1996: 21.8,
+    1997: 11.0,
+    1998: 84.5,
+    1999: 36.6,
+    2000: 20.1,
+    2001: 18.8,
+    2002: 15.06,
+    2003: 11.99,
+    2004: 11.74,
+    2005: 10.91,
+    2006: 9.0,
+    2007: 11.87,
+    2008: 13.28,
+    2009: 8.80,
+    2010: 8.78,
+    2011: 6.10,
+    2012: 6.58,
+    2013: 6.45,
+    2014: 11.36,
+    2015: 12.90,
+    2016: 5.4,
+    2017: 2.5,
+    2018: 4.3,
+    2019: 3.05,
+    2020: 4.91,
+    2021: 8.39,
+    2022: 11.92,
+    2023: 7.42,
+    2024: 1.94,
+};
+
+function calculate() {
+    const initialValue = parseFloat(document.getElementById("initial-value").value);
+    const startYear = parseInt(document.getElementById("start-year").value);
+    const endYear = parseInt(document.getElementById("end-year").value);
+    const years = endYear - startYear;
+    let totalInflationRate = 1;
+
+    // Вычисление общей ставки инфляции для выбранных лет
+    for (let year = startYear; year <= endYear; year++) {
+        totalInflationRate *= (1 + inflationRates[year] / 100);
+    }
+
+    const futureValue = initialValue * totalInflationRate;
+    let yearsString = "год";
+    if (years > 1 && years < 5) {
+        yearsString = "года";
+    } else if (years >= 5) {
+        yearsString = "лет";
+    }
+    document.getElementById("result").innerText = `С ${startYear} по ${endYear} год, стоимость будет равна ${futureValue.toLocaleString(undefined, { maximumFractionDigits: 2 })} рублей.`;
+}
+    </script>
+    </main>
+</body>
+</html>
